@@ -42,32 +42,6 @@ class LoginController: UIViewController {
     }()
     
 //    MARK: Handlers
-    @objc func handleRegister() {
-        guard let email = emailTextField.text, let password = passwordTextField.text, let name = nameTextField.text else { print("Invalid form"); return }
-        Auth.auth().createUser(withEmail: email, password: password) { (user: User?, error) in
-            if error != nil {
-                print(error!)
-                return
-            }
-            
-            guard let uid = user?.uid else {
-                return
-            }
-            
-            let ref = Database.database().reference(fromURL: "https://chatty-bb680.firebaseio.com/")
-            let usersReference = ref.child("users").child(uid)
-            let values = ["name": name, "email": email]
-            usersReference.updateChildValues(values, withCompletionBlock: { (err, ref) in
-                if err != nil {
-                    print(err!)
-                    return
-                }
-                
-                self.dismiss(animated: true, completion: nil)
-                print("Saved user successfully in DB")
-            })
-        }
-    }
     
     @objc func handleLoginRegister() {
         if loginRegisterSegmentedControl.selectedSegmentIndex == 0 {
@@ -144,11 +118,15 @@ class LoginController: UIViewController {
         return tf
     }()
     
-    let profileImageView: UIImageView = {
+    lazy var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "gameofthrones_splash")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFill
+        
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectProfileImageView)))
+        imageView.isUserInteractionEnabled = true
+        
         return imageView
     }()
 

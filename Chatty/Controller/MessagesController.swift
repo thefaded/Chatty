@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  MessagesController.swift
 //  Chatty
 //
 //  Created by Daniil on 19.12.17.
@@ -22,8 +22,8 @@ class MessagesController: UITableViewController {
         checkIfUserIsLoggedIn()
     }
     
-    @objc func handleNewMessage() {
-        
+    override func didMove(toParentViewController parent: UIViewController?) {
+        checkIfUserIsLoggedIn()
     }
     
     func checkIfUserIsLoggedIn() {
@@ -42,8 +42,13 @@ class MessagesController: UITableViewController {
         }
     }
     
+    @objc func handleNewMessage() {
+        let newMessageController = NewMessageController()
+        let navController = UINavigationController(rootViewController: newMessageController)
+        present(navController, animated: true, completion: nil)
+    }
+    
     @objc func handleLogout() {
-        
         do {
             try Auth.auth().signOut()
         } catch let logoutError {
