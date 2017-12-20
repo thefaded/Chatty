@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 
 class LoginController: UIViewController {
+    var messagesController: MessagesController?
 //    MARK: Form inputs
     let inputsContainerView: UIView = {
         let view = UIView()
@@ -58,6 +59,8 @@ class LoginController: UIViewController {
                 print(error!)
                 return
             }
+            
+            self.messagesController?.fetchUserAndSetupNavBarTitle()
             self.dismiss(animated: true, completion: nil)
         }
     }
@@ -116,6 +119,12 @@ class LoginController: UIViewController {
         tf.translatesAutoresizingMaskIntoConstraints = false
         tf.isSecureTextEntry = true
         return tf
+    }()
+    
+    let btnToChat: UIButton = {
+        let btn = UIButton()
+        btn.titleLabel?.text = "GO TO CHAT CONTROLLER"
+        return btn
     }()
     
     lazy var profileImageView: UIImageView = {
@@ -212,7 +221,7 @@ class LoginController: UIViewController {
     func setupProfileImageView() {
         profileImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         profileImageView.bottomAnchor.constraint(equalTo: loginRegisterSegmentedControl.topAnchor, constant: -12).isActive = true
-        profileImageView.widthAnchor.constraint(equalToConstant: 24).isActive = true
+        profileImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
         profileImageView.heightAnchor.constraint(equalToConstant: 150).isActive = true
     }
     

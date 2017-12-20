@@ -18,6 +18,10 @@
 		A4AA87581FE8ED0D003FD05F /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AA87571FE8ED0D003FD05F /* LoginController.swift */; };
 		A4BB03A61FEA536D0050F662 /* ChatUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BB03A51FEA536D0050F662 /* ChatUser.swift */; };
 		A4BB03A81FEA57F50050F662 /* LoginController+handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BB03A71FEA57F50050F662 /* LoginController+handlers.swift */; };
+		A4BB03AB1FEA774C0050F662 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BB03AA1FEA774C0050F662 /* Extensions.swift */; };
+		A4BB03AD1FEA7B630050F662 /* ChattLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BB03AC1FEA7B630050F662 /* ChattLogController.swift */; };
+		A4BB03AF1FEAA6030050F662 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BB03AE1FEAA6030050F662 /* Message.swift */; };
+		A4BB03B21FEAADD10050F662 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4BB03B11FEAADD10050F662 /* UserCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +40,10 @@
 		A4AA87591FE90B01003FD05F /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A4BB03A51FEA536D0050F662 /* ChatUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUser.swift; sourceTree = "<group>"; };
 		A4BB03A71FEA57F50050F662 /* LoginController+handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginController+handlers.swift"; sourceTree = "<group>"; };
+		A4BB03AA1FEA774C0050F662 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		A4BB03AC1FEA7B630050F662 /* ChattLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChattLogController.swift; sourceTree = "<group>"; };
+		A4BB03AE1FEAA6030050F662 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		A4BB03B11FEAADD10050F662 /* UserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +96,8 @@
 		A4AA87431FE8EA26003FD05F /* Chatty */ = {
 			isa = PBXGroup;
 			children = (
+				A4BB03B01FEAADC20050F662 /* View */,
+				A4BB03A91FEA773E0050F662 /* Helpers */,
 				A4BB03A41FEA53580050F662 /* Model */,
 				A4AA87561FE8ECF3003FD05F /* Controller */,
 				A4AA87441FE8EA26003FD05F /* AppDelegate.swift */,
@@ -107,6 +117,7 @@
 				A4AA87571FE8ED0D003FD05F /* LoginController.swift */,
 				A4BB03A71FEA57F50050F662 /* LoginController+handlers.swift */,
 				A44303A11FE929550069C738 /* NewMessageController.swift */,
+				A4BB03AC1FEA7B630050F662 /* ChattLogController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -115,8 +126,25 @@
 			isa = PBXGroup;
 			children = (
 				A4BB03A51FEA536D0050F662 /* ChatUser.swift */,
+				A4BB03AE1FEAA6030050F662 /* Message.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		A4BB03A91FEA773E0050F662 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				A4BB03AA1FEA774C0050F662 /* Extensions.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		A4BB03B01FEAADC20050F662 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				A4BB03B11FEAADD10050F662 /* UserCell.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -258,9 +286,13 @@
 				A44303A21FE929550069C738 /* NewMessageController.swift in Sources */,
 				A4AA87471FE8EA26003FD05F /* MessagesController.swift in Sources */,
 				A4BB03A81FEA57F50050F662 /* LoginController+handlers.swift in Sources */,
+				A4BB03AF1FEAA6030050F662 /* Message.swift in Sources */,
 				A4AA87581FE8ED0D003FD05F /* LoginController.swift in Sources */,
 				A4BB03A61FEA536D0050F662 /* ChatUser.swift in Sources */,
+				A4BB03AD1FEA7B630050F662 /* ChattLogController.swift in Sources */,
 				A4AA87451FE8EA26003FD05F /* AppDelegate.swift in Sources */,
+				A4BB03B21FEAADD10050F662 /* UserCell.swift in Sources */,
+				A4BB03AB1FEA774C0050F662 /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
