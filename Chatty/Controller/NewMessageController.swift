@@ -78,6 +78,9 @@ class NewMessageController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         dismiss(animated: true) {
             let user = self.users[indexPath.row]
+            DispatchQueue.main.async(execute: {
+                self.tableView.reloadData()
+            })
             self.messagesController?.showChatControllerForUser(user: user)
         }
     }

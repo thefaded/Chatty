@@ -9,11 +9,46 @@
 import UIKit
 import Firebase
 
-class ChattLogController: UICollectionViewController, UITextFieldDelegate {
+class ChattLogController: UICollectionViewController, UITextFieldDelegate, UICollectionViewDelegateFlowLayout {
     var user: ChatUser? {
         didSet {
             navigationItem.title = user?.name
+            
+            observeMessages()
         }
+    }
+    
+    var messages = [Message]()
+    
+    func observeMessages() {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+        
+        let userMessagesRef = Database.database().reference().child("user-mesages").child(uid)
+        userMessagesRef.observe(.childAdded, with: { (snapshot) in
+            
+            let messageId = snapshot.key
+            let messagesRef = Database.database().reference().child("messages").child(messageId)
+            messagesRef.observeSingleEvent(of: .value, with: { (snapshot) in
+                
+                guard let dictionary = snapshot.value as? [String: Any] else {
+                    return
+                }
+                
+                let message = Message(dictionary: dictionary)
+//                message.setValuesForKeys(dictionary)
+                
+                if message.chatPartnerId() == self.user?.id {
+                    self.messages.append(message)
+                    DispatchQueue.main.async(execute: {
+                        self.collectionView?.reloadData()
+                    })
+                }
+                
+                }, withCancel: nil)
+            
+            }, withCancel: nil)
     }
     
     lazy var inputTextField: UITextField = {
@@ -29,13 +64,38 @@ class ChattLogController: UICollectionViewController, UITextFieldDelegate {
         
         navigationItem.title = "Chat log controller"
         
+        collectionView?.alwaysBounceVertical = true
         collectionView?.backgroundColor = UIColor.white
+        collectionView?.register(ChatMessengeCell.self, forCellWithReuseIdentifier: cellId)
         
         setupInputComponents()
     }
     
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return messages.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: 80)
+    }
+    
+    let cellId = "cellId"
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChatMessengeCell
+        cell.backgroundColor = UIColor.blue
+
+        let message = messages[indexPath.item]
+
+        cell.textView.text = message.text
+
+        return cell
+    }
+    
     func setupInputComponents() {
         let containerView = UIView()
+        containerView.backgroundColor = UIColor.white
         containerView.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(containerView)
@@ -49,7 +109,6 @@ class ChattLogController: UICollectionViewController, UITextFieldDelegate {
         sendButton.setTitle("Send", for: UIControlState())
         sendButton.translatesAutoresizingMaskIntoConstraints = false
         
-        //what is handleSend?
         sendButton.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
         containerView.addSubview(sendButton)
         //x,y,w,h
@@ -79,13 +138,52 @@ class ChattLogController: UICollectionViewController, UITextFieldDelegate {
         separatorLineView.heightAnchor.constraint(equalToConstant: 1).isActive = true
     }
     
+//    func getName(fromId: String) -> String {
+//        let rootRef = Database.database().reference()
+//        let query = rootRef.child("users")
+//        var retval: String?
+//        query.observe(.value) { (snapshot) in
+////            print(snapshot.key)
+//            for child in snapshot.children.allObjects as! [DataSnapshot] {
+//                if child.key == fromId {
+//                    if let value = child.value as? NSDictionary {
+//
+//                    }
+//                }
+//            }
+//        }
+//        return retval!
+//    }
+    
+    var retval: String?
+    
+    func getName(fromId: String) {
+        let rootRef = Database.database().reference()
+        let query = rootRef.child("users").queryOrdered(byChild: "name")
+        query.observe(.value) { (snapshot) in
+            for child in snapshot.children.allObjects as! [DataSnapshot] {
+                if let value = child.value as? NSDictionary {
+                    let chk = child.key
+                    if chk == fromId {
+                        print("TRUE")
+                        self.retval = value["name"] as? String
+                    }
+               }
+            }
+        }
+    }
+    
     @objc func handleSend() {
         let ref = Database.database().reference().child("messages")
         let childRef = ref.childByAutoId()
         let toId = user!.id!
         let fromId = Auth.auth().currentUser!.uid
         let timestamp = Int(Date().timeIntervalSince1970)
-        let values = ["text": inputTextField.text!, "toId": toId, "fromId": fromId, "timestamp": timestamp] as [String : Any]
+//        getName(fromId: fromId)
+//        var addedText = getName(fromId: fromId)
+//        var addedText = "\(self.retval): \(inputTextField.text!)"
+        
+        let values = ["text": inputTextField.text!  , "toId": toId, "fromId": fromId, "timestamp": timestamp] as [String : Any]
 //        childRef.updateChildValues(values)
         
         childRef.updateChildValues(values) { (error, ref) in

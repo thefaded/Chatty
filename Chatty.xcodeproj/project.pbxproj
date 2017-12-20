@@ -10,6 +10,7 @@
 		0DCFD6782178BCEEC39185FA /* Pods_Chatty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64CD40F26CDAA463DA941F8A /* Pods_Chatty.framework */; };
 		A44303A01FE911960069C738 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A4AA87591FE90B01003FD05F /* GoogleService-Info.plist */; };
 		A44303A21FE929550069C738 /* NewMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44303A11FE929550069C738 /* NewMessageController.swift */; };
+		A44D037E1FEAC816008737C9 /* ChatMessengeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A44D037D1FEAC816008737C9 /* ChatMessengeCell.swift */; };
 		A4AA87451FE8EA26003FD05F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AA87441FE8EA26003FD05F /* AppDelegate.swift */; };
 		A4AA87471FE8EA26003FD05F /* MessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4AA87461FE8EA26003FD05F /* MessagesController.swift */; };
 		A4AA874A1FE8EA26003FD05F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A4AA87481FE8EA26003FD05F /* Main.storyboard */; };
@@ -29,6 +30,7 @@
 		6C6688C2B20A1710B416A0A1 /* Pods-Chatty.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chatty.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chatty/Pods-Chatty.release.xcconfig"; sourceTree = "<group>"; };
 		8A57272D9FBBE49DDF68858B /* Pods-Chatty.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chatty.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Chatty/Pods-Chatty.debug.xcconfig"; sourceTree = "<group>"; };
 		A44303A11FE929550069C738 /* NewMessageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageController.swift; sourceTree = "<group>"; };
+		A44D037D1FEAC816008737C9 /* ChatMessengeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessengeCell.swift; sourceTree = "<group>"; };
 		A4AA87411FE8EA26003FD05F /* Chatty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chatty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4AA87441FE8EA26003FD05F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A4AA87461FE8EA26003FD05F /* MessagesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesController.swift; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				A4BB03B11FEAADD10050F662 /* UserCell.swift */,
+				A44D037D1FEAC816008737C9 /* ChatMessengeCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A44303A21FE929550069C738 /* NewMessageController.swift in Sources */,
+				A44D037E1FEAC816008737C9 /* ChatMessengeCell.swift in Sources */,
 				A4AA87471FE8EA26003FD05F /* MessagesController.swift in Sources */,
 				A4BB03A81FEA57F50050F662 /* LoginController+handlers.swift in Sources */,
 				A4BB03AF1FEAA6030050F662 /* Message.swift in Sources */,
